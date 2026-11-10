@@ -46,9 +46,10 @@ service mfgloader /system/vendor/bin/hw/mfgloader
 
 service macloader /system/vendor/bin/hw/macloader
     class main
+    group root inet
     oneshot
 
 # end of WiFi MFG (TestMode)
 
 on property:vold.decrypt=trigger_restart_framework
-exec /system/vendor/bin/hw/macloader
+    exec - root root inet -- /system/vendor/bin/hw/macloader
